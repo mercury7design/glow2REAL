@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
+//First I wrote .pages.yml, then I wrote tsconfig.json in a way that matched it
+//here, I import the collection I created in the tsconfig.json
+import { getCollection } from "astro:content";
+const blogPosts = await getCollection("posts");
+const publishedPosts = blogPosts.filter((post) => !post.data.draft);
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+
+
+
+
+
+  <h1>Blog Posts</h1>
+  <ul>
+    {publishedPosts.map((post) => (
+      <li key={post.id}>
+        <a href={`/blog/${post.slug ?? post.id}`}>
+          <h2>{post.data.title}</h2>
+        </a>
+        <p>{post.data.pubDatetime}</p>
+        <p>{post.data.description}</p>
+      </li>
+    ))}
+  </ul>
+
 </Layout>
