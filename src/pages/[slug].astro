@@ -30,7 +30,6 @@ export async function getStaticPaths() {
   <article>
     <h1>{post.data.title}</h1>
     <p>{post.data.pubDatetime}</p>
-    {post.data.ogImage && <img src={post.data.ogImage} alt={post.data.title} />}
     <p>{post.data.description}</p>
     <div>{post.body}</div>
   </article>
