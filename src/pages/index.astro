@@ -1,24 +1,23 @@
 ---
-//First I wrote .pages.yml, then I wrote tsconfig.json in a way that matched it
+//First I wrote .pages.yml, then I wrote config.ts in a way that matched it
 //here, I import the collection I created in the tsconfig.json
+
 import { getCollection } from "astro:content";
-const blogPosts = await getCollection("posts");
-const publishedPosts = blogPosts.filter((post) => !post.data.draft);
 import Layout from '../layouts/Layout.astro';
+
+const publishedPosts = await (async () => {
+  const blogPosts = await getCollection("posts");
+  return blogPosts.filter((post) => !post.data.draft);
+})();
 
 ---
 
 <Layout>
-
-
-
-
-
   <h1>Blog Posts</h1>
   <ul>
     {publishedPosts.map((post) => (
       <li key={post.id}>
-        <a href={`/blog/${post.slug ?? post.id}`}>
+        <a href={`/${post.slug ?? post.id}`}>
           <h2>{post.data.title}</h2>
         </a>
         <p>{post.data.pubDatetime}</p>
@@ -26,5 +25,4 @@ import Layout from '../layouts/Layout.astro';
       </li>
     ))}
   </ul>
-
 </Layout>

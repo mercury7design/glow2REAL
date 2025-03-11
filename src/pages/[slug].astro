@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+
+const { slug } = Astro.params;
+
+const post = await (async () => {
+  const blogPosts = await getCollection("posts");
+  // Find the post that matches the URL slug
+  const post = blogPosts.find((p) => p.slug === slug || p.id === slug);
+  if (!post) {
+    throw new Error("Post not found");
+  }
+  return post;
+})();
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("posts");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug ?? post.id },
+  }));
+}
+
+---
+
+<html lang="en">
+<head>
+  <title>{post.data.title}</title>
+</head>
+<body>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p>{post.data.pubDatetime}</p>
+    {post.data.ogImage && <img src={post.data.ogImage} alt={post.data.title} />}
+    <p>{post.data.description}</p>
+    <div>{post.body}</div>
+  </article>
+</body>
+</html>
