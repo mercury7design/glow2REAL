@@ -20,6 +20,7 @@ const publishedPosts = blogPosts.filter((post) => !post.data.draft);
         </a>
         <p>{post.data.pubDatetime}</p>
         <p>{post.data.description}</p>
+        {post.data.ogImage && <img src={post.data.ogImage} alt={post.data.title} />}
       </li>
     ))}
   </ul>
