@@ -9,7 +9,6 @@ const publishedPosts = await (async () => {
   const blogPosts = await getCollection("posts");
   return blogPosts.filter((post) => !post.data.draft);
 })();
-
 ---
 
 <Layout>
