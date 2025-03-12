@@ -1,5 +1,12 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+	"extends": "astro/tsconfigs/strict", // Extends the strict configuration from Astro
+	"include": [".astro/types.d.ts", "**/*"], // Includes all TypeScript and Astro files in the project
+	"exclude": ["dist"], // Excludes the dist directory from the TypeScript project
+	"compilerOptions": {
+		"baseUrl": ".", // Sets the base URL for module resolution
+		"paths": {
+			"astro:content": ["./src/content"], // Maps the astro:content module to the src/content directory
+			"astro:media": ["./src/content/media"] // Maps the astro:media module to the src/content/media directory
+		}
+	}
 }
