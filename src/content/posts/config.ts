@@ -9,7 +9,7 @@ const postsCollection = defineCollection({
 		draft: z.boolean().optional(),
 		description: z.string(),
 		body: z.string().optional(), // `rich-text` in Pages CMS maps to `string`
-		coverImage: z.image().optional(), // just trying this out
+		ogImage: z.ogImage().optional(), // just trying this out
 	}),
 })
 

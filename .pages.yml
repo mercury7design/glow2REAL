@@ -16,7 +16,7 @@ content:
       - { name: draft, label: Draft, type: boolean }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
-      - { name: coverImage, label: Cover Image, type: image, list: true  }
+      - { name: ogImage, label: Featured Image, type: string }
   - name: about
     label: About page
     type: file
